@@ -1,37 +1,33 @@
 <!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>CodePen - A Pen by  dhruvnaidu</title>
-  <link rel="stylesheet" href="./style.css">
-
-</head>
+<html>
+<link rel="stylesheet" type="text/css" href="a.css">
 <body>
-<!-- partial:index.partial.html -->
+
 <h1 id="title">Survey Form</h1>
   <p id="description">Let us know how we can improve freeCodeCamp</p>
   
+
     <form id="survey-form">
       <div class="form-group">
-      <label id="name-label" for="name">Name:</label>
+      <label id="name-label" >Name:</label>
       <input id="name" type="text" required placeholder="Enter your first name">
       <span class="validity"></span>
       </div>      
       
       <div class="form-group">
-      <label id="email-label" for="name">Email:</label>
+      <label id="email-label" >Email:</label>
       <input id="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required placeholder="Enter your email">
       <span class="validity"></span>
       </div>
      
       <div class="form-group">
-      <label id="number-label" for="name">Your Age:</label>
+      <label id="number-label" >Your Age:</label>
       <input id="number" type="number" min="10" max="99" step="1" required placeholder="Age">
       <span class="validity"></span> 
       </div>
      
       <div class="form-group">      
-      <label id="role-label" for="name">What is your current role:</label>
+      <label id="role-label" >What is your current role:</label>
       <select id="dropdown" name="current-role">
         <option value="" disabled selected>Select an option</option>
         <option value="student">Student</option>
@@ -44,9 +40,9 @@
       <div class="form-group">       
       <p>How ikely is that you would recommend freeCodeCamp to a friend:</p>
       <div class="input-group">
-        <label for="yes"><input id="yes" type="radio" name="user-rating" value="yes" checked> Definitely</label>
-        <label for="no"><input id="no" type="radio" name="user-rating" value="no"> Maybe</label>
-        <label for="unsure"><input id="unsure" type="radio" name="user-rating" value="notsure"> Not sure</label>
+        <label for="yes"><input id="yes" type="radio" value="yes" checked> Definitely</label>
+        <label for="no"><input id="no" type="radio" value="no"> Maybe</label>
+        <label for="unsure"><input id="unsure" type="radio" value="notsure"> Not sure</label>
       </div>
       </div>
      
@@ -68,11 +64,10 @@
       </div>
       </div>
      
-      <div class="form-group">
+    <div class="form-group">
       <input id="submit" class="button" type="submit" value="Submit">
       </div>
     </form>
-<!-- partial -->
   
 </body>
 </html>
