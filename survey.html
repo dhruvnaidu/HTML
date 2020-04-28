@@ -1,0 +1,73 @@
+
+<html>
+<link rel="stylesheet" type="text/css" href="survey.css">
+<body>
+
+<h1 id="title">Survey Form</h1>
+  <p id="description">Let us know how we can improve freeCodeCamp</p>
+  
+<!---name--->
+    <form id="survey-form">
+      <div class="form-group">
+      <label id="name-label" >Name:</label>
+      <input id="name" type="text" required placeholder="Enter your first name">
+      <span class="validity"></span>
+      </div>      
+      
+      <div class="form-group">
+      <label id="email-label" >Email:</label>
+      <input id="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required placeholder="Enter your email">
+      <span class="validity"></span>
+      </div>
+     
+      <div class="form-group">
+      <label id="number-label" >Your Age:</label>
+      <input id="number" type="number" min="10" max="99" step="1" required placeholder="Age">
+      <span class="validity"></span> 
+      </div>
+     
+      <div class="form-group">      
+      <label id="role-label" >What is your current role:</label>
+      <select id="dropdown" name="current-role">
+        <option value="" disabled selected>Select an option</option>
+        <option value="student">Student</option>
+        <option value="smb">Business Owner</option>
+        <option value="other">Other</option>
+      </select>
+      </div>
+      </div>
+     
+      <div class="form-group">       
+      <p>How ikely is that you would recommend freeCodeCamp to a friend:</p>
+      <div class="input-group">
+        <label for="yes"><input id="yes" type="radio" name="rec" value="yes" checked> Definitely</label>
+        <label for="no"><input id="no" type="radio" name="rec" value="no"> Maybe</label>
+        <label for="unsure"><input id="unsure" type="radio" name="rec" value="notsure"> Not sure</label>
+      </div>
+      </div>
+     
+          <div class="form-group">       
+            <p>What do you like most in FCC</p>
+      <div class="input-group">
+        <select id="dropdown" name="current-role">
+           <option value="" disabled selected>Select an option</option>
+        </select>
+      </div>
+      </div>
+     
+       <div class="form-group">       
+      <p>Things that should be improved in the future<br>(Check all that apply)</p>
+      <div class="input-group">
+        <label><input type="checkbox" name="improvements" value="events"> Front-end Projects</label>
+        <label><input type="checkbox" name="improvements" value="widgets"> Back-end Projecs</label>
+        <label><input type="checkbox" name="improvements" value="neglookaheads"> Data Visualizatin</label>
+      </div>
+      </div>
+     
+    <div class="form-group">
+      <input id="submit" class="button" type="submit" value="Submit">
+      </div>
+    </form>
+  
+</body>
+</html>
