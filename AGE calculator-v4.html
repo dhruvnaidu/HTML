@@ -1,0 +1,53 @@
+    <html lang="en">
+
+        <head>
+        <title>Age calculator</title>
+    </head>
+
+    <body>
+    
+        <form>
+            Birthday: <input type="date" name="bday" id="birth_date">
+            <br><br>
+        </form>
+        
+        <button onclick="myFunction()">view</button><br>
+        <h2 id="age">Enter your age</h2>
+        
+        <script>
+
+            function myFunction()
+	    {
+
+                var dobString = document.getElementById("birth_date").value;
+                var calculatedValue = calculate_age(dobString);
+
+        }
+
+            function calculate_age(dobString) {
+            var diff_ms = Date.now() - Date.parse(dobString);
+
+            var yearString = "";
+
+            var yearValue = Math.floor(diff_ms / 31536000000);
+
+            console.log("Years ", yearValue);
+          
+            if (yearValue > 1) yearString = " years";
+
+            else yearString = " year";
+          
+            if (yearValue > 0) 
+
+                var calculatedValue = yearValue + yearString + " ";
+
+            else if (yearValue == 0) 
+
+                var calculatedValue = monthValue + monthString + " ";
+           
+            document.getElementById("age").innerHTML = "Your Age is : " + calculatedValue;
+
+        }
+
+        </script>
+    </body>
