@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<select name="country" id="country"  class="country" >
+  <option value="London">London</option>
+  <option value="Chennai">Chennai</option>
+  <option value="Delhi">Delhi</option>
+  <option value="Visakhapatnam">Visakhapatnam</option>
+</select>
+    <div id="result" style="border:5px ;font: outline;">result here</div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script>
+$(document).ready(function(){
+    $("select.country").change(function(){
+        var selectedCountry = $(this).children("option:selected").val();
+        //alert("You have selected the country - " + selectedCountry);
+        console.log("selected value"+selectedCountry);
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function()
+                {
+                  if (this.readyState == 4 && this.status == 200)
+                 {
+                    var json = $.parseJSON(this.responseText);
+                    document.getElementById("result").innerHTML = selectedCountry+":"+this.response;
+                 }
+                };
+                xhttp.open("GET","https://api.openweathermap.org/data/2.5/weather?q="+selectedCountry+"&appid=2ed23a9e218c67041a6853dec1eb24da", true);
+                    xhttp.send();
+        
+    });
+});
+</script>
+</body>
+</html>
