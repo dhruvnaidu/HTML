@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+</head>
+<div id="demo" ></div>
+</div>
+<div id="result"></div>
+<body>
+    <script>
+      var xhttp = new XMLHttpRequest();
+ 
+            xhttp.onreadystatechange = function()
+                {
+                  if (this.readyState == 4 && this.status == 200)
+                 {
+                    //console.log(this.response)
+
+                    var arrayOfObjects = eval(this.response);
+                    
+                    for (var i = 0; i < arrayOfObjects.length; i++) {
+            var object = arrayOfObjects[i];
+            document.getElementById("result").innerHTML += object.id +" "+object.name+" "+object.email+ "<br/>" ;
+                    }
+
+                                     }
+                };
+                xhttp.open("GET","https://5e2ac93c4fdc030014e20c2a.mockapi.io/get", true);
+                    xhttp.send();
+                    
+ 
+    </script>
+    
+</body>
+</html> 
