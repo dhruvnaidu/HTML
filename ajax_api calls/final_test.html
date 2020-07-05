@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        table, th, td {
+  border: 1px solid black;
+}
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var y;
+        $('#btnAdd').click(function () {
+            var x = $('#event').val();
+            var eventurl = "https://maker.ifttt.com/trigger/" + x + "/with/key/fj8OEG2LlZsi6gNhqTEvGOLDH0vgETx6fUWHEUqt3w4"
+                
+                $.get(eventurl, function (data, status) {
+                    alert("Data: " + data + "\nStatus: " + status);
+                });
+
+if(x=="Got_the_data")
+{
+        $.getJSON("https://5e2ac93c4fdc030014e20c2a.mockapi.io/get", function (result) 
+    {
+        $("#tablebodys").html("");
+        $.each(result, function (i, object) 
+        {
+            var appendData = '<tr>';
+            appendData += '<td> ' + object.id + ' </td>';
+            appendData += '<td>' + object.name + '</td>';
+            appendData += '<td>' + object.email + '</td>';
+            appendData += '<td> <button onclick = "deleterecord(' + object.id + ')"  > DELETE </button></td>';
+            appendData += '<td> <button onclick = "updaterecord(' + object.id + ')" > UPDATE </button></td></br>';
+            $("#tablebodys").append(appendData);
+            //   document.getElementById("tablebodys").innerHTML += '<tr> <td>' + object.id + '</td> <td>' + object.name + '</td> <td>' + object.email + '</td><td><button onclick = "deleterecord(' + object.id + ')">DELETE</button></td><td><button onclick = "updaterecord(' + object.id + ')">UPDATE</button></td><br/>'
+        });
+    });
+}
+else
+{
+  alert("wrong input");
+}
+var obj = {
+                name: $('#txtFname').val(),
+                email: $('#txtemail').val()
+            }
+
+            var putObj = {
+                id: $('#hiddenId').val(),
+                name: $('#txtFname').val(),
+                email: $('#txtemail').val(),
+
+            }
+            var recordId = $('#hiddenId').val();
+            if (recordId > 0) {
+
+                $.ajax({
+                    url: 'https: //5e2ac93c4fdc030014e20c2a.mockapi.io/get/' + recordId,
+                    method: PUT,
+                    data: putObj,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function() {
+                        alert('Saved successfully');
+                    },
+                    error: function(error) {
+                        alert(error);
+                    }
+                })
+
+
+            } else {
+
+                $.post("https://5e2ac93c4fdc030014e20c2a.mockapi.io/get", obj,
+                    function(data, status) {
+                        alert("Data:" + JSON.stringify(data) + "\nStatus: " + status);
+                        //location.reload();
+
+                    });
+            }
+
+        });
+    });
+</script>
+
+<body>
+    <table style="width:100%;border: 2px solid blanchedalmond">
+    <tr >
+        <td style="border: 2px solid blanchedalmond">Event</td>
+        <td><input type="text" id="event" value="Got_the_data"> </td>
+    </tr>
+    <tr>
+        <td>first name</td>
+        <td><input type="text" id="txtFname"></td>
+    </tr>
+    <tr>
+        <td>email</td>
+        <td><input type="text" id="txtemail"></td>
+    </tr>
+    <tr>
+        <td style="background-color: bisque;">
+    <input type="button" value="Add" id="btnAdd"></td>
+    </tr>
+    </table>
+
+    <table id='tablebodys'>
+    </table>
+</body>
+
+</html>
