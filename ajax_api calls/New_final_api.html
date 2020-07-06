@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        input[type=text] {
+            width: 50%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 3px solid #ccc;
+            border-radius: 15px;
+            -webkit-transition: 0.5s;
+            transition: 0.5s;
+            outline: none;
+        }
+
+        input[type=text]:focus {
+            border: 3px solid #555;
+        }
+
+        input[type=button] {
+            background-color: #44c767;
+            border-radius: 28px;
+            border: 1px solid #18ab29;
+            display: inline-block;
+            cursor: pointer;
+            color: #ffffff;
+            font-family: Arial;
+            font-size: 17px;
+            padding: 16px 31px;
+            text-decoration: none;
+            text-shadow: 0px 1px 0px #2f6627;
+            padding: 0px;
+        }
+
+        input[type=button]:hover {
+            background-color: #5cbf2a;
+        }
+
+        input[type=button]:active {
+            position: relative;
+            top: 1px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#namerow").hide();
+        $("#emailrow").hide();
+
+
+        $('#btnAdd').click(function () {
+
+            var txtFname = $('#txtFname').val();
+            var txtemail = $('#txtemail').val();
+            var event = $('#event').val();
+
+            var obj = {
+                name: $('#txtFname').val(),
+                email: $('#txtemail').val()
+            }
+            if (event.length > 1) {
+
+
+                var eventurl = "https://maker.ifttt.com/trigger/" + event + "/with/key/fj8OEG2LlZsi6gNhqTEvGOLDH0vgETx6fUWHEUqt3w4"
+                if (event == "Got_the_data") {
+                    $("#namerow").show();
+                    $("#emailrow").show();
+                    $("#eventrow").hide();
+
+                    $.get(eventurl, function (data, status) {
+                        alert("eventurl gata: " + data + "\nStatus: " + status);
+
+                    });
+                }
+            }
+            if (txtFname.length > 1 && txtemail.length > 1) {
+
+                $.post("https://5e2ac93c4fdc030014e20c2a.mockapi.io/get", obj,
+                    function (data, status) {
+                        alert("Data:" + JSON.stringify(data) + "\nStatus: " + status);
+                        getAlldata();
+
+                    });
+
+            }/* else {
+                alert("Name and email can't be empty")
+            }*/
+
+
+
+
+
+
+
+            var putObj = {
+                id: $('#hiddenId').val(),
+                name: $('#txtFname').val(),
+                email: $('#txtemail').val(),
+
+            }
+            var recordId = $('#hiddenId').val();
+            if (recordId > 0) {
+
+                $.ajax({
+                    url: 'https: //5e2ac93c4fdc030014e20c2a.mockapi.io/get/' + recordId,
+                    method: PUT,
+                    data: putObj,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function () {
+                        alert('Saved successfully');
+                    },
+                    error: function (error) {
+                        alert(error);
+                    }
+                })
+
+
+            } else {
+
+
+            }
+
+        });
+    });
+
+    function getAlldata() {
+
+
+        $.getJSON("https://5e2ac93c4fdc030014e20c2a.mockapi.io/get", function (result) {
+            $("#tablebodys").html("");
+            $.each(result, function (i, object) {
+                var appendData = '<tr>';
+                appendData += '<td> ' + object.id + ' </td>';
+                appendData += '<td>' + object.name + '</td>';
+                appendData += '<td>' + object.email + '</td>';
+                appendData += '<td> <button onclick = "deleterecord(' + object.id + ')"  > DELETE </button></td>';
+                appendData += '<td> <button onclick = "updaterecord(' + object.id + ')" > UPDATE </button></td></br>';
+                $("#tablebodys").append(appendData);
+                //   document.getElementById("tablebodys").innerHTML += '<tr> <td>' + object.id + '</td> <td>' + object.name + '</td> <td>' + object.email + '</td><td><button onclick = "deleterecord(' + object.id + ')">DELETE</button></td><td><button onclick = "updaterecord(' + object.id + ')">UPDATE</button></td><br/>'
+            });
+        });
+    }
+
+    function deleterecord(id) {
+        console.log('id deleted')
+        $.ajax({
+            url: 'https://5e2ac93c4fdc030014e20c2a.mockapi.io/get/' + id,
+            method: 'DELETE',
+            success: function () {
+                alert('deleted')
+                getAlldata();
+            },
+            error: function (error) {
+                alert(error);
+            }
+        })
+    }
+
+    function updaterecord(id2) {
+        alert(id2)
+
+        $.ajax({
+            url: 'https://5e2ac93c4fdc030014e20c2a.mockapi.io/get/' + id2,
+            method: 'PUT',
+            dataType: 'json',
+            success: function (data) {
+                alert(JSON.stringify(data))
+                $('#txtFname').val(data.name);
+                $('#txtemail').val(data.email);
+                $('#hiddenId').val(data.id);
+
+            },
+            error: function name(error) {
+                alert(error);
+            }
+        });
+    }
+</script>
+
+<body>
+    <table style="width:100%;border: 5px solid black;">
+        <tr id="eventrow">
+            <td>Event</td>
+            <td><input type="text" id="event" value="Got_the_data"> </td>
+        </tr>
+        <tr id="namerow">
+            <td>Name</td>
+            <td><input type="text" id="txtFname"></td>
+        </tr>
+        <tr id="emailrow">
+            <td>Email</td>
+            <td><input type="text" id="txtemail"></td>
+        </tr>
+        <tr>
+            <td style="border-color: white;">
+                <input type="button" value="Add" id="btnAdd" style="width: 100px;height:35px"></td>
+        </tr>
+    </table>
+
+    <table id='tablebodys'>
+    </table>
+</body>
+
+</html>
