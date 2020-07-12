@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<style>
+    body {
+        background-color: #222222;
+        font-family: consolas;
+    }
+
+
+    @font-face {
+        font-family: neon;
+        src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/neon.ttf);
+    }
+
+    .container {
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+        position: absolute;
+        left: 600px;
+        top: 50px;
+    }
+
+    .neon {
+        font-family: neon;
+        color: #38ef7d;
+        font-size: 5vw;
+        line-height: 9vw;
+        text-shadow: 0 0 3vw #11998e;
+    }
+
+    .neon {
+        animation: neon 1s ease infinite;
+        -moz-animation: neon 1s ease infinite;
+        -webkit-animation: neon 1s ease infinite;
+    }
+
+    @keyframes neon {
+
+        0%,
+        100% {
+            text-shadow: 0 0 1vw #38ef7d, 0 0 3vw #38ef7d, 0 0 10vw #38ef7d, 0 0 10vw #38ef7d, 0 0 .4vw #38efaf, .5vw .5vw .1vw #25b07f;
+            color: #17ff6e;
+        }
+
+        50% {
+            text-shadow: 0 0 .5vw #11998e, 0 0 1.5vw #11998e, 0 0 5vw #11998e, 0 0 5vw #11998e, 0 0 .2vw #11998e, .5vw .5vw .1vw #40340A;
+            color: #14857b;
+        }
+    }
+
+
+
+
+
+    form {
+        margin: 100px;
+    }
+
+    .input-field {
+        position: relative;
+        width: 250px;
+        height: 44px;
+        line-height: 44px;
+    }
+
+    label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        color: #d3d3d3;
+        transition: 0.2s all;
+        cursor: text;
+    }
+
+    input {
+        width: 100%;
+        border: 0;
+        outline: 0;
+        padding: 0.5rem 0;
+        border-bottom: 2px solid #d3d3d3;
+        box-shadow: none;
+        color: #111;
+    }
+
+    input:invalid {
+        outline: 0;
+        /* color: #ff2300;
+   border-color: #ff2300;*/
+    }
+
+    input:focus,
+    input:valid {
+        border-color: #00dd22;
+
+    }
+
+    input:focus~label,
+    input:valid~label {
+        font-size: 14px;
+        top: -24px;
+        color: #00dd22;
+    }
+
+
+    .yolo {
+        display: inline-block;
+        padding: 5px 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-decoration: none;
+        font-size: 20px;
+        overflow: hidden;
+        transition: 0.2s;
+        margin: 10px;
+        border-radius: 25px;
+        position: absolute;
+        top: 235px;
+        left: 260px;
+    }
+
+
+    .tet {
+        color: #00ff00;
+        border: 2px solid #00ff00;
+    }
+
+    .tet:hover {
+        color: #368425;
+        background: #00ff00;
+        box-shadow: 0 0 10px #00ff00, 0 0 40px #00ff00, 0 0 80px #00ff00;
+    }
+</style>
+<script>
+    $(document).ready(
+        function () {
+            $('#button').click(
+                function () {
+                    var toAdd = $('input[name=ListItem]').val();
+                    $('ul').append('<li style="color:white; ">' + toAdd + '</li>');
+                });
+
+            $("input[name=ListItem]").keyup(function (event) {
+                if (event.keyCode == 13) {
+                    $("#button").click();
+                }
+            });
+
+            $(document).on('dblclick', 'li', function () {
+                $(this).toggleClass('strike').fadeOut('slow');
+            });
+
+            $('input').focus(function () {
+                $(this).val('');
+            });
+
+            $('ul').sortable();
+
+        }
+    );
+</script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+
+            <div class="neon">TO-DO List
+
+            </div>
+
+            <form name="toDoList">
+        </div>
+        <div class="row border">
+            <div class="col-sm-3">
+                <div class="input-field">
+                    <input type="text" name="ListItem" style="background-color:#222222; color:#FFFAFA;" id="inputer"
+                        required />
+                    <label for="inputer">NEW WORK..</label>
+                </div>
+                <span onclick="newElement()" id="button">
+                    <a class="yolo tet ">Add</a></span>
+            </div>
+
+        </div>
+        </form>
+        <div class="row">
+            <ul></ul>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
