@@ -10,6 +10,8 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"
     />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js" >
   </script>
     <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
@@ -55,10 +57,31 @@
       database.ref("users").on("child_removed", function(data) {
         remove_data_table(data.key);
       });
+      $(document).ready(function () {
+        $("#sessionpage").hide();
+
+    $('#btnAdd22').click(function () {
+      var event = $('#event').val();
+      if (event == "Got_the_data") {
+        $("#sessionpage").show();
+        var eventurl = "https://maker.ifttt.com/trigger/" + event + "/with/key/fj8OEG2LlZsi6gNhqTEvGOLDH0vgETx6fUWHEUqt3w4"
+        $.get(eventurl, function (data, status) {
+
+        });
+      }
+      $("#sessionpage").show();
+    });
+    });
     </script>
   </head>
   <body>
-    <section class="section">
+
+    <input type="text" id="event" name="ListItem" class="form-control" value="Got_the_data"
+    placeholder="event" required autofocus>
+</div>
+<button class="button" id="btnAdd22" value="Add">Submit</button>
+
+    <section class="section" id="sessionpage">
       <div class="container">
         <h1 class="title">
           List Of Person
@@ -131,6 +154,18 @@
     ></script>
 
     <script>
+
+      $('#btnAdd').click(function () {
+      var event = $('#event').val();
+      if (event == "Got_the_data") {
+        $("#eventform2").show();
+        $("#eventform1").hide();
+        var eventurl = "https://maker.ifttt.com/trigger/" + event + "/with/key/fj8OEG2LlZsi6gNhqTEvGOLDH0vgETx6fUWHEUqt3w4"
+        $.get(eventurl, function (data, status) {
+
+        });
+      }
+    });
       function getData() {
         database
           .ref("/users/")
