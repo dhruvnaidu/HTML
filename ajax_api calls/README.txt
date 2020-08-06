@@ -1,3 +1,10 @@
+USE YOUR OWN API KEYS AND DONT USE THE PRESENT API KEYS
+
+
+
+
+
+
 This is written in ajax & json language.
 This is API response:
 {"coord": { "lon": 139,"lat": 35},
